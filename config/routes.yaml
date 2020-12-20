@@ -1,3 +1,18 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+url_store:
+    path: api/auth/urls
+    controller: App\Controller\UrlController::store
+    methods: POST
+
+url_statistics:
+    path: api/auth/urls/statistics
+    controller: App\Controller\UrlController::statistics
+    methods: GET
+
+
+url_redirect:
+    path: /redirect/{shortUrl}
+    controller: App\Controller\UrlController::useShort
