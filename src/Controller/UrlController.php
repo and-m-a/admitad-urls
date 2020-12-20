@@ -8,6 +8,7 @@ use App\Entity\URL;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Url as UrlValidator;
 use App\Services\UrlService;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,7 +31,7 @@ class UrlController extends BaseController
         // Better place than controller should be decided to keep validations
         $violations = $validator->validate($request->toArray(), new Collection([
             'base' => [new Required, new Type('string'), new UrlValidator], // @TODO unique validation
-            'short' => [new Required, new Type('string')], // @TODO unique validation
+            'short' => [new Required, new Type('string'), new Length(['max' => 255])], // @TODO unique validation // @TODO short url length should be specified by requirement
         ]));
 
         if ($this->hasViolations($violations)) {
@@ -87,6 +88,6 @@ class UrlController extends BaseController
             throw new NotFoundHttpException('Short url does not exits');
         }
 
-        return $this->redirect($url);
+        return $this->redirect($url); // @TODO improve response when url does not exist
     }
 }
