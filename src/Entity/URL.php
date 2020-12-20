@@ -13,7 +13,7 @@ class URL extends BaseEntity
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned"=true})
      */
     private $id;
 
@@ -41,7 +41,7 @@ class URL extends BaseEntity
     /**
      * @TODO QueryBuilder select and group by does not work without this
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned"=true})
      */
     private $user_id;
 
